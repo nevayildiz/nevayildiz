@@ -1,0 +1,52 @@
+package com.example.gpa;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class GpaApplication extends Application {
+
+    @Override
+    public void start(Stage stage) {
+
+        Label title = new Label("Not Ortalaması Hesaplama");
+
+        TextField d1 = new TextField();
+        d1.setPromptText("Ders 1 Notu");
+
+        TextField d2 = new TextField();
+        d2.setPromptText("Ders 2 Notu");
+
+        TextField d3 = new TextField();
+        d3.setPromptText("Ders 3 Notu");
+
+        Button hesapla = new Button("Hesapla");
+        Label sonuc = new Label();
+
+        hesapla.setOnAction(e -> {
+            try {
+                double n1 = Double.parseDouble(d1.getText());
+                double n2 = Double.parseDouble(d2.getText());
+                double n3 = Double.parseDouble(d3.getText());
+
+                sonuc.setText("Ortalama: " + (n1 + n2 + n3) / 3);
+            } catch (Exception ex) {
+                sonuc.setText("Geçerli sayı giriniz!");
+            }
+        });
+
+        VBox root = new VBox(10, title, d1, d2, d3, hesapla, sonuc);
+        root.setPadding(new Insets(15));
+
+        stage.setScene(new Scene(root, 300, 300));
+        stage.setTitle("GPA Calculator");
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
